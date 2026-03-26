@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>InvestPro GH — Admin</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="admin.css"/>
+<style>
+@keyframes spin{to{transform:rotate(360deg);}}
+.logo-mark{display:inline-flex;align-items:center;gap:.55rem;}
+.logo-mark svg{width:26px;height:26px;flex-shrink:0;}
+.logo-name{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;color:var(--text);}
+.logo-name em{font-style:normal;color:var(--accent);}
+</style>
+</head>
+<body>
+
+<div id="loadingOverlay" style="display:none;position:fixed;inset:0;background:rgba(10,12,16,.88);z-index:9999;align-items:center;justify-content:center;">
+  <div style="width:38px;height:38px;border:3px solid rgba(240,192,64,.2);border-top-color:#f0c040;border-radius:50%;animation:spin .8s linear infinite;"></div>
+</div>
+
+<!-- ADMIN AUTH -->
+<div id="adminAuthScreen" class="auth-screen">
+  <div class="auth-bg"><div class="orb orb1"></div><div class="orb orb2"></div></div>
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="10" fill="#0a0c10"/>
+          <rect x="8" y="40" width="10" height="16" rx="2" fill="#c89a20"/>
+          <rect x="22" y="28" width="10" height="28" rx="2" fill="#e0b030"/>
+          <rect x="36" y="14" width="10" height="42" rx="2" fill="#f0c040"/>
+          <polygon points="41,6 54,20 41,34 28,20" fill="#f0c040"/>
+          <polygon points="41,12 50,20 41,28 32,20" fill="#0a0c10" opacity="0.6"/>
+        </svg>
+        <span class="logo-name">InvestPro <em>GH</em></span>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:.78rem;color:var(--dim);margin-bottom:1.4rem;text-transform:uppercase;letter-spacing:.06em;">Admin Access Only</p>
+    <div class="field-group">
+      <label>Admin Password</label>
+      <input type="password" id="adminPass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')adminLogin()"/>
+    </div>
+    <button class="btn-primary w100" onclick="adminLogin()">Access Admin Panel</button>
+  </div>
+</div>
+
+<!-- ADMIN APP -->
+<div id="adminApp" style="display:none">
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <rect width="64" height="64" rx="10" fill="#0a0c10"/>
+            <rect x="8" y="40" width="10" height="16" rx="2" fill="#c89a20"/>
+            <rect x="22" y="28" width="10" height="28" rx="2" fill="#e0b030"/>
+            <rect x="36" y="14" width="10" height="42" rx="2" fill="#f0c040"/>
+            <polygon points="41,6 54,20 41,34 28,20" fill="#f0c040"/>
+            <polygon points="41,12 50,20 41,28 32,20" fill="#0a0c10" opacity="0.6"/>
+          </svg>
+          <span class="logo-name">Admin <em>Panel</em></span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="nav-item active" onclick="aPage('overview')"    data-page="overview"><span class="nav-icon">⬡</span>Overview</a>
+        <a class="nav-item"        onclick="aPage('deposits')"    data-page="deposits"><span class="nav-icon">↓</span>Deposits</a>
+        <a class="nav-item"        onclick="aPage('withdrawals')" data-page="withdrawals"><span class="nav-icon">↑</span>Withdrawals</a>
+        <a class="nav-item"        onclick="aPage('users')"       data-page="users"><span class="nav-icon">◎</span>Users</a>
+        <a class="nav-item"        onclick="aPage('investments')" data-page="investments"><span class="nav-icon">◈</span>Investments</a>
+        <a class="nav-item"        onclick="aPage('support')"      data-page="support"><span class="nav-icon">💬</span>Support</a>
+        <a class="nav-item"        onclick="aPage('settings')"    data-page="settings"><span class="nav-icon">≡</span>Settings</a>
+      </nav>
+      <div class="sidebar-footer"><button class="btn-logout" onclick="adminLogout()">Sign Out</button></div>
+    </aside>
+
+    <main class="admin-main">
+
+      <!-- OVERVIEW -->
+      <div id="admin-page-overview" class="page active">
+        <div class="page-hdr"><h1>Platform Overview</h1><p class="page-sub">InvestPro GH — Live Firebase Data</p></div>
+        <div class="stats-grid">
+          <div class="stat-card gold"><div class="stat-lbl">Total Users</div><div class="stat-val" id="ovUsers">—</div></div>
+          <div class="stat-card"><div class="stat-lbl">Pending Deposits</div><div class="stat-val" id="ovPendDep">—</div></div>
+          <div class="stat-card"><div class="stat-lbl">Pending Withdrawals</div><div class="stat-val" id="ovPendWdr">—</div></div>
+          <div class="stat-card"><div class="stat-lbl">Total Deposited</div><div class="stat-val">GHS <span id="ovTotDep">0.00</span></div></div>
+          <div class="stat-card"><div class="stat-lbl">Total Withdrawn</div><div class="stat-val">GHS <span id="ovTotWdr">0.00</span></div></div>
+          <div class="stat-card"><div class="stat-lbl">Active Investments</div><div class="stat-val" id="ovActInv">—</div></div>
+        </div>
+        <div class="card" style="margin-top:1.5rem">
+          <div class="card-title">⚡ Quick Actions</div>
+          <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:.9rem">
+            <button class="btn-primary" style="width:auto" onclick="aPage('deposits')">Review Deposits</button>
+            <button class="btn-secondary" style="width:auto" onclick="aPage('withdrawals')">Review Withdrawals</button>
+            <button class="btn-secondary" style="width:auto" onclick="runProfitSim()">▶ Run Daily Profit Now</button>
+          </div>
+          <p style="font-size:.78rem;color:var(--dim);margin-top:.8rem;line-height:1.6;">💡 <strong>Profits run automatically at midnight</strong> for each logged-in user. Use "Run Daily Profit Now" to manually credit all active investments at once.</p>
+        </div>
+      </div>
+
+      <!-- DEPOSITS -->
+      <div id="admin-page-deposits" class="page">
+        <div class="page-hdr"><h1>Deposit Requests</h1><p class="page-sub">Approve to credit balance · Referral bonus paid automatically on first deposit</p></div>
+        <div class="a-tabs">
+          <button class="filter-btn active" onclick="fDep('pending',this)">Pending</button>
+          <button class="filter-btn" onclick="fDep('approved',this)">Approved</button>
+          <button class="filter-btn" onclick="fDep('rejected',this)">Rejected</button>
+          <button class="filter-btn" onclick="fDep('all',this)">All</button>
+        </div>
+        <div id="depList" class="a-table-wrap"></div>
+      </div>
+
+      <!-- WITHDRAWALS -->
+      <div id="admin-page-withdrawals" class="page">
+        <div class="page-hdr"><h1>Withdrawal Requests</h1><p class="page-sub">Fee deducted from amount — send the <strong style="color:var(--green)">"Send This"</strong> amount to user's MoMo</p></div>
+        <div class="a-tabs">
+          <button class="filter-btn active" onclick="fWdr('pending',this)">Pending</button>
+          <button class="filter-btn" onclick="fWdr('approved',this)">Approved</button>
+          <button class="filter-btn" onclick="fWdr('rejected',this)">Rejected</button>
+          <button class="filter-btn" onclick="fWdr('all',this)">All</button>
+        </div>
+        <div id="wdrList" class="a-table-wrap"></div>
+      </div>
+
+      <!-- USERS -->
+      <div id="admin-page-users" class="page">
+        <div class="page-hdr"><h1>All Users</h1><p class="page-sub">Live from Firebase</p></div>
+        <div id="userList" class="a-table-wrap"></div>
+      </div>
+
+      <!-- INVESTMENTS -->
+      <div id="admin-page-investments" class="page">
+        <div class="page-hdr"><h1>All Investments</h1><p class="page-sub">Active and completed plans</p></div>
+        <div id="invList" class="a-table-wrap"></div>
+      </div>
+
+      <!-- SUPPORT CHAT -->
+      <div id="admin-page-support" class="page">
+        <div class="page-hdr"><h1>Deposit Support</h1><p class="page-sub">User messages about deposit issues — reply to each user</p></div>
+        <div id="supportList" class="a-table-wrap"></div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div id="admin-page-settings" class="page">
+        <div class="page-hdr"><h1>Platform Settings</h1><p class="page-sub">All settings saved to Firebase — works on every device</p></div>
+        <div class="form-card" style="max-width:700px">
+
+          <!-- MTN NUMBERS -->
+          <div class="s-section">
+            <div class="card-title" style="color:#f0c040">📱 MTN MoMo Accounts</div>
+            <p class="s-desc">Users with MTN numbers (024, 054, 055, 059) will be assigned one of these accounts for deposit.</p>
+            <div id="mtnNumList"></div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:flex-end">
+              <div class="field-group" style="flex:1;margin:0;min-width:140px"><input type="text" id="newMtnNum" placeholder="MTN MoMo number"/></div>
+              <div class="field-group" style="flex:1;margin:0;min-width:140px"><input type="text" id="newMtnName" placeholder="Account name e.g. Kwame Mensah"/></div>
+              <button class="btn-primary" style="width:auto;padding:.72rem 1.2rem" onclick="addMtnNum()">Add MTN</button>
+            </div>
+          </div>
+
+          <hr class="s-divider"/>
+
+          <!-- TELECEL NUMBERS -->
+          <div class="s-section">
+            <div class="card-title" style="color:#f0c040">📱 Telecel Cash Accounts</div>
+            <p class="s-desc">Users with Telecel numbers (020, 050) will be assigned one of these accounts for deposit.</p>
+            <div id="telecelNumList"></div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:flex-end">
+              <div class="field-group" style="flex:1;margin:0;min-width:140px"><input type="text" id="newTelecelNum" placeholder="Telecel Cash number"/></div>
+              <div class="field-group" style="flex:1;margin:0;min-width:140px"><input type="text" id="newTelecelName" placeholder="Account name e.g. Ama Serwaa"/></div>
+              <button class="btn-primary" style="width:auto;padding:.72rem 1.2rem" onclick="addTelecelNum()">Add Telecel</button>
+            </div>
+          </div>
+
+          <hr class="s-divider"/>
+
+          <!-- ARKESEL SMS -->
+          <div class="s-section">
+            <div class="card-title">📹 Daily Task Video</div>
+            <p class="s-desc">Post a new YouTube link each day. Users must watch this video to unlock their 5% daily return. Change it every day!</p>
+            <div class="field-group"><label>Today's Video URL (YouTube link)</label><input type="url" id="cfgDailyVideoUrl" placeholder="https://www.youtube.com/watch?v=..."/></div>
+            <div class="field-group"><label>Video Title (shown to users)</label><input type="text" id="cfgDailyVideoTitle" placeholder="e.g. Investment Tips for Today"/></div>
+            <div class="field-group"><label>Video Date</label><input type="date" id="cfgDailyVideoDate"/></div>
+            <button class="btn-secondary" style="width:auto" onclick="saveVideoLink()">📹 Post Today's Video</button>
+            <div id="videoSaveMsg" style="display:none;margin-top:.5rem;font-size:.8rem;color:var(--green);">✅ Video posted! Users can now watch to earn.</div>
+          </div>
+
+          <hr class="s-divider"/>
+            <p class="s-desc">You get an SMS when a user submits a deposit. Sign up free at <a href="https://arkesel.com" target="_blank" style="color:var(--accent)">arkesel.com</a> → API Keys</p>
+            <div class="field-group">
+              <label>Your Phone Number</label>
+              <div class="phone-wrap"><span class="phone-prefix">🇬🇭 +233</span><input type="tel" id="cfgAdminPhone" placeholder="0244123456" maxlength="10"/></div>
+            </div>
+            <div class="field-group"><label>Arkesel API Key</label><input type="text" id="cfgArkeselKey" placeholder="Your API key"/></div>
+            <div class="field-group"><label>Sender ID (max 11 chars)</label><input type="text" id="cfgArkeselSender" placeholder="InvestProGH" maxlength="11"/></div>
+            <button class="btn-secondary" style="width:auto" onclick="testSMS()">📤 Send Test SMS</button>
+          </div>
+
+          <hr class="s-divider"/>
+
+          <!-- EMAILJS -->
+          <div class="s-section">
+            <div class="card-title">📧 EmailJS — Email Alerts</div>
+            <p class="s-desc">Sign up free at <a href="https://emailjs.com" target="_blank" style="color:var(--accent)">emailjs.com</a>. Template needs: <code>{{to_email}}</code> <code>{{subject}}</code> <code>{{message}}</code></p>
+            <div class="field-group"><label>Your Email</label><input type="email" id="cfgAdminEmail" placeholder="your@email.com"/></div>
+            <div class="field-group"><label>EmailJS Service ID</label><input type="text" id="cfgEjsService" placeholder="service_xxxxxxx"/></div>
+            <div class="field-group"><label>EmailJS Template ID</label><input type="text" id="cfgEjsTemplate" placeholder="template_xxxxxxx"/></div>
+            <div class="field-group"><label>EmailJS Public Key</label><input type="text" id="cfgEjsKey" placeholder="xxxxxxxxxxxxxxxxx"/></div>
+          </div>
+
+          <hr class="s-divider"/>
+          <button class="btn-primary w100" onclick="saveSettings()">💾 Save All Settings to Firebase</button>
+          <hr class="s-divider"/>
+
+          <!-- CHANGE PASSWORD -->
+          <div class="s-section">
+            <div class="card-title">🔐 Change Admin Password</div>
+            <div class="field-group"><label>New Password (min 6 chars)</label><input type="password" id="newAdminPass" placeholder="New password"/></div>
+            <button class="btn-secondary" style="width:auto" onclick="changePass()">Update Password</button>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div id="modal" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <div class="modal-icon" id="modalIcon">✓</div>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-body" id="modalBody"></div>
+    <button class="btn-primary" onclick="closeModal()">OK</button>
+  </div>
+</div>
+<div id="toast" class="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="module" src="app.js"></script>
+<script type="module" src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>About Us — Saxo Bank</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0c10;--surface:#111318;--surface2:#181c23;--border:rgba(255,255,255,0.07);--accent:#f0c040;--accent2:#e0a820;--green:#22c55e;--text:#f0f0f0;--dim:rgba(240,240,240,0.52);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;}
+h1,h2,h3,h4,nav{font-family:Inter,sans-serif;}
+a{text-decoration:none;color:inherit;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 5%;background:rgba(10,12,16,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.logo-mark{display:inline-flex;align-items:center;gap:.6rem;}
+.logo-name{font-family:Inter,sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:-.02em;}
+.logo-name em{font-style:normal;color:var(--accent);}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-links a{font-size:.9rem;color:var(--dim);transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);}
+.nav-cta{background:var(--accent);color:#000;padding:.55rem 1.3rem;border-radius:7px;font-family:Inter,sans-serif;font-weight:700;font-size:.88rem;}
+.nav-cta:hover{background:var(--accent2);}
+
+/* PAGE */
+.page-hero{padding:8rem 5% 4rem;text-align:center;border-bottom:1px solid var(--border);}
+.page-hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.03em;margin-bottom:1rem;}
+.page-hero h1 em{font-style:normal;color:var(--accent);}
+.page-hero p{color:var(--dim);font-size:1rem;max-width:560px;margin:0 auto;}
+.content{max-width:780px;margin:0 auto;padding:4rem 5%;}
+.section{margin-bottom:3rem;}
+.section h2{font-size:1.4rem;font-weight:700;margin-bottom:1rem;color:var(--accent);}
+.section h3{font-size:1.05rem;font-weight:700;margin-bottom:.5rem;margin-top:1.2rem;color:var(--text);}
+.section p{color:var(--dim);font-size:.93rem;margin-bottom:.8rem;line-height:1.8;}
+.section ul{color:var(--dim);font-size:.93rem;padding-left:1.2rem;margin-bottom:.8rem;}
+.section ul li{margin-bottom:.4rem;line-height:1.7;}
+
+/* CARDS */
+.value-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:1.5rem;}
+.value-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.4rem;}
+.value-icon{font-size:1.8rem;margin-bottom:.7rem;}
+.value-card h3{font-size:.95rem;font-weight:700;margin-bottom:.4rem;color:var(--text);}
+.value-card p{font-size:.82rem;color:var(--dim);line-height:1.6;}
+
+/* TEAM */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;margin-top:1.5rem;}
+.team-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.4rem;text-align:center;}
+.team-av{width:60px;height:60px;background:var(--accent);color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Inter,sans-serif;font-weight:800;font-size:1.3rem;margin:0 auto .7rem;}
+.team-card h3{font-size:.92rem;font-weight:700;color:var(--text);}
+.team-card p{font-size:.78rem;color:var(--dim);margin-top:.2rem;}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1.2rem;}
+.contact-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.1rem;display:flex;align-items:center;gap:.8rem;}
+.contact-icon{font-size:1.3rem;flex-shrink:0;}
+.contact-item h4{font-size:.82rem;font-weight:600;color:var(--text);}
+.contact-item p{font-size:.78rem;color:var(--dim);}
+
+/* FOOTER */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem 5%;text-align:center;font-size:.82rem;color:var(--dim);}
+footer a{color:var(--accent);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo-mark">
+    <svg viewBox="0 0 64 64" width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+      <rect width="64" height="64" rx="10" fill="#0a0c10"/>
+      <rect x="8" y="40" width="10" height="16" rx="2" fill="#c89a20"/>
+      <rect x="22" y="28" width="10" height="28" rx="2" fill="#e0b030"/>
+      <rect x="36" y="14" width="10" height="42" rx="2" fill="#f0c040"/>
+      <polygon points="41,6 54,20 41,34 28,20" fill="#f0c040"/>
+      <polygon points="41,12 50,20 41,28 32,20" fill="#0a0c10" opacity="0.6"/>
+    </svg>
+    <span class="logo-name">Saxo Bank <em>GH</em></span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About</a>
+    <a href="terms.html">Terms</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="dashboard.html" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <h1>About <em>Saxo Bank</em></h1>
+  <p>Ghana's trusted daily investment platform — built to help everyday Ghanaians grow their money simply and reliably.</p>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <h2>Who We Are</h2>
+    <p>Saxo Bank is a Ghana-based investment platform that allows individuals to grow their savings through daily returns. We are based in Accra, Ghana and operate exclusively within the Ghanaian market, accepting payments through MTN MoMo and Telecel Cash.</p>
+    <p>We were founded with a simple mission: to make investment accessible to every Ghanaian — not just the wealthy few. Whether you have GHS 150 or GHS 1,000, you can start earning daily returns with Saxo Bank.</p>
+  </div>
+
+  <div class="section">
+    <h2>Our Mission</h2>
+    <p>To empower Ghanaians with a simple, transparent, and reliable way to grow their money — no complicated processes, no hidden fees, no experience required.</p>
+  </div>
+
+  <div class="section">
+    <h2>Our Values</h2>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-icon">🔐</div>
+        <h3>Transparency</h3>
+        <p>Every fee, every return, every policy is clearly stated upfront. No surprises.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🤝</div>
+        <h3>Reliability</h3>
+        <p>Withdrawals processed every Thursday without fail. We keep our promises.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🇬🇭</div>
+        <h3>Ghana First</h3>
+        <p>Built by Ghanaians, for Ghanaians. We understand the local market and our users.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📱</div>
+        <h3>Simplicity</h3>
+        <p>If you can use MoMo, you can use Saxo Bank. No complexity, no jargon.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>How It Works</h2>
+    <p>Saxo Bank operates on a simple model:</p>
+    <ul>
+      <li>You deposit funds into your account via MTN MoMo or Telecel Cash</li>
+      <li>You choose an investment plan (GHS 150 — GHS 1,000)</li>
+      <li>Your investment earns 5% daily returns for 30 days</li>
+      <li>Profits are credited to your balance every midnight</li>
+      <li>You can withdraw your earnings every Thursday to your MoMo</li>
+    </ul>
+    <p>A 1.4% withdrawal processing fee is deducted from your withdrawal amount. There are no other hidden fees.</p>
+  </div>
+
+  <div class="section">
+    <h2>Our Referral Program</h2>
+    <p>We reward our community. When you refer a friend to Saxo Bank and they make their first deposit, you earn a <strong style="color:var(--accent)">5% referral bonus</strong> of their deposit amount — credited instantly to your balance. There is no limit to how many people you can refer.</p>
+  </div>
+
+  <div class="section">
+    <h2>Contact Us</h2>
+    <p>We are here to help. Reach us through any of the channels below:</p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <h4>Location</h4>
+          <p>Accra, Ghana</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div>
+          <h4>Email</h4>
+          <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d9aaaca9a9b6abad99b0b7afbcaaada9abb6beb1f7bab6b4">[email&#160;protected]</a></p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📱</div>
+        <div>
+          <h4>WhatsApp</h4>
+          <p>Available on request</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <h4>Support Hours</h4>
+          <p>Mon – Fri, 8am – 6pm</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 Saxo Bank. All rights reserved. Accra, Ghana. &nbsp;|&nbsp; <a href="terms.html">Terms</a
