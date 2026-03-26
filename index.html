@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Saxo Bank — Be Invited. Start Investing.</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--accent:#0033A0;--accent2:#002280;--light:#e8edf8;--green:#00875a;--text:#1a1a2e;--dim:#6b7280;--bg:#ffffff;--bg2:#f5f6f8;--border:#e5e7eb;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);padding:0 5%;height:60px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{display:flex;align-items:center;gap:.5rem;}
+.nav-logo-box{width:28px;height:28px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;color:#fff;}
+.nav-logo-text{font-size:1rem;font-weight:700;color:var(--text);letter-spacing:-.01em;}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-links a{font-size:.85rem;color:var(--dim);transition:color .2s;font-weight:500;}
+.nav-links a:hover{color:var(--accent);}
+.nav-open{background:var(--accent);color:#fff;padding:.45rem 1.1rem;font-size:.82rem;font-weight:600;border-radius:2px;transition:background .2s;}
+.nav-open:hover{background:var(--accent2);}
+.nav-login{color:var(--accent);font-size:.82rem;font-weight:600;border:1.5px solid var(--accent);padding:.42rem 1rem;border-radius:2px;transition:all .2s;}
+.nav-login:hover{background:var(--accent);color:#fff;}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 8% 4rem;gap:4rem;background:var(--bg);}
+.hero-left{}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--light);color:var(--accent);font-size:.75rem;font-weight:600;padding:.3rem .85rem;border-radius:20px;margin-bottom:1.5rem;letter-spacing:.04em;text-transform:uppercase;}
+.hero h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;line-height:1.15;letter-spacing:-.03em;color:var(--text);margin-bottom:1.2rem;}
+.hero h1 span{color:var(--accent);}
+.hero-features{list-style:none;margin-bottom:2rem;}
+.hero-features li{display:flex;align-items:flex-start;gap:.65rem;padding:.5rem 0;font-size:.9rem;color:var(--dim);border-bottom:1px solid var(--border);}
+.hero-features li:last-child{border-bottom:none;}
+.feat-check{width:18px;height:18px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.feat-check svg{width:10px;height:10px;}
+.hero-ctas{display:flex;gap:.85rem;flex-wrap:wrap;}
+.btn-hero-primary{background:var(--accent);color:#fff;padding:.75rem 1.6rem;border-radius:2px;font-weight:600;font-size:.9rem;transition:all .2s;display:inline-block;}
+.btn-hero-primary:hover{background:var(--accent2);}
+.btn-hero-ghost{color:var(--accent);padding:.75rem 1.6rem;border:1.5px solid var(--accent);border-radius:2px;font-weight:600;font-size:.9rem;transition:all .2s;display:inline-block;}
+.btn-hero-ghost:hover{background:var(--accent);color:#fff;}
+
+/* HERO RIGHT — Mock dashboard */
+.hero-right{display:flex;justify-content:center;}
+.mock-device{width:280px;background:#fff;border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 40px rgba(0,51,160,.12);overflow:hidden;}
+.mock-header{background:var(--accent);padding:.8rem 1rem;display:flex;justify-content:space-between;align-items:center;}
+.mock-header span{color:#fff;font-size:.78rem;font-weight:600;}
+.mock-bal{padding:1rem;border-bottom:1px solid var(--border);}
+.mock-bal-lbl{font-size:.65rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;}
+.mock-bal-val{font-size:1.5rem;font-weight:700;color:var(--text);margin:.2rem 0;}
+.mock-bal-sub{font-size:.7rem;color:var(--green);font-weight:600;}
+.mock-stats{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--border);}
+.mock-stat{padding:.7rem 1rem;border-right:1px solid var(--border);}
+.mock-stat:last-child{border-right:none;}
+.mock-stat-lbl{font-size:.6rem;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;}
+.mock-stat-val{font-size:.9rem;font-weight:700;color:var(--text);margin-top:.15rem;}
+.mock-task{padding:.8rem 1rem;background:var(--light);}
+.mock-task-title{font-size:.7rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;}
+.mock-task-bar{background:#fff;border-radius:3px;height:6px;margin-bottom:.3rem;}
+.mock-task-bar-fill{height:6px;background:var(--accent);border-radius:3px;width:60%;}
+.mock-task-text{font-size:.65rem;color:var(--dim);}
+.mock-nav{display:flex;border-top:1px solid var(--border);}
+.mock-nav-item{flex:1;padding:.6rem;text-align:center;font-size:.6rem;color:var(--dim);font-weight:600;}
+.mock-nav-item.active{color:var(--accent);}
+
+/* ACCOUNT TYPES */
+.account-section{padding:5rem 8%;background:var(--bg2);}
+.section-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:.6rem;}
+.section-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.8rem;}
+.section-sub{color:var(--dim);font-size:.9rem;max-width:520px;line-height:1.7;margin-bottom:2.5rem;}
+.account-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:760px;}
+.account-card{background:#fff;border:1.5px solid var(--border);border-radius:4px;padding:2rem;transition:all .25s;cursor:pointer;}
+.account-card:hover{border-color:var(--accent);box-shadow:0 4px 24px rgba(0,51,160,.1);}
+.account-card.featured{border-color:var(--accent);}
+.account-tag{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);background:var(--light);padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:.8rem;}
+.account-card h3{font-size:1.2rem;font-weight:700;margin-bottom:.5rem;color:var(--text);}
+.account-card p{font-size:.84rem;color:var(--dim);line-height:1.6;margin-bottom:1.2rem;}
+.account-card ul{list-style:none;margin-bottom:1.4rem;}
+.account-card ul li{font-size:.82rem;color:var(--dim);padding:.3rem 0;display:flex;align-items:center;gap:.5rem;}
+.account-card ul li::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0;}
+.account-btn{display:block;text-align:center;background:var(--accent);color:#fff;padding:.65rem 1.2rem;border-radius:2px;font-weight:600;font-size:.85rem;transition:background .2s;}
+.account-card:not(.featured) .account-btn{background:transparent;color:var(--accent);border:1.5px solid var(--accent);}
+.account-btn:hover{background:var(--accent2);color:#fff;}
+
+/* HOW IT WORKS */
+.how-section{padding:5rem 8%;background:var(--bg);}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-top:2.5rem;}
+.step{position:relative;}
+.step-num{font-size:2.5rem;font-weight:800;color:var(--light);line-height:1;margin-bottom:.5rem;font-family:'Inter',sans-serif;}
+.step h3{font-size:.95rem;font-weight:700;margin-bottom:.4rem;}
+.step p{font-size:.82rem;color:var(--dim);line-height:1.6;}
+
+/* TRUST */
+.trust-section{padding:4rem 8%;background:var(--accent);color:#fff;}
+.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-top:2rem;}
+.trust-item{text-align:center;}
+.trust-icon{font-size:1.8rem;margin-bottom:.6rem;}
+.trust-item h3{font-size:.92rem;font-weight:700;margin-bottom:.3rem;}
+.trust-item p{font-size:.8rem;opacity:.75;line-height:1.5;}
+
+/* FAQ */
+.faq-section{padding:5rem 8%;background:var(--bg2);}
+.faq-list{max-width:680px;margin:2.5rem auto 0;display:flex;flex-direction:column;gap:.6rem;}
+.faq-item{background:#fff;border:1px solid var(--border);border-radius:2px;overflow:hidden;}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.2rem;cursor:pointer;font-weight:600;font-size:.88rem;user-select:none;}
+.faq-q:hover{color:var(--accent);}
+.faq-icon{font-size:1.1rem;color:var(--accent);transition:transform .2s;flex-shrink:0;}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq-a p{padding:0 1.2rem 1rem;font-size:.84rem;color:var(--dim);line-height:1.7;}
+.faq-item.open .faq-a{max-height:200px;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+
+/* FOOTER */
+footer{background:var(--text);color:rgba(255,255,255,.7);padding:3rem 8% 2rem;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;}
+.footer-brand p{font-size:.8rem;line-height:1.7;margin-top:.6rem;max-width:260px;}
+.footer-col h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.45);margin-bottom:.8rem;font-weight:700;}
+.footer-col a{display:block;font-size:.8rem;margin-bottom:.4rem;transition:color .2s;cursor:pointer;}
+.footer-col a:hover{color:#fff;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);font-size:.75rem;flex-wrap:wrap;gap:.8rem;}
+.footer-address{font-size:.72rem;opacity:.45;margin-top:.4rem;line-height:1.6;}
+.risk-warning{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:2px;padding:.8rem 1rem;font-size:.72rem;color:rgba(255,255,255,.5);line-height:1.6;margin-top:1.5rem;}
+
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;padding:80px 5% 3rem;gap:2.5rem;}
+  .hero-right{display:none;}
+  .account-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-box">S</div>
+    <span class="nav-logo-text">SAXO</span>
+  </div>
+  <div class="nav-links">
+    <a href="#accounts">Account types</a>
+    <a href="#how">How it works</a>
+    <a href="#faq">FAQ</a>
+    <a href="about.html">About Saxo</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:.7rem;">
+    <a href="dashboard.html" class="nav-login">Log in</a>
+    <a href="dashboard.html" class="nav-open">Open account</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">🌐 Based in Denmark · Licensed</div>
+    <h1>Get everything you<br/>need in <span>one account</span></h1>
+    <ul class="hero-features">
+      <li>
+        <div class="feat-check"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        Simple, online account signup with no minimum deposit
+      </li>
+      <li>
+        <div class="feat-check"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        All products and markets available in one account
+      </li>
+      <li>
+        <div class="feat-check"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        Safety and security from a licensed Danish bank
+      </li>
+    </ul>
+    <div class="hero-ctas">
+      <a href="dashboard.html" class="btn-hero-primary">Open individual account</a>
+      <a href="#accounts" class="btn-hero-ghost">See account types</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="mock-device">
+      <div class="mock-header">
+        <span>SaxoInvestor</span>
+        <span style="font-size:.65rem;opacity:.75;">DKK Account</span>
+      </div>
+      <div class="mock-bal">
+        <div class="mock-bal-lbl">Account Value</div>
+        <div class="mock-bal-val">GHS 1,250.00</div>
+        <div class="mock-bal-sub">▲ +GHS 62.50 today</div>
+      </div>
+      <div class="mock-stats">
+        <div class="mock-stat">
+          <div class="mock-stat-lbl">Invested</div>
+          <div class="mock-stat-val">GHS 300</div>
+        </div>
+        <div class="mock-stat">
+          <div class="mock-stat-lbl">Returns</div>
+          <div class="mock-stat-val" style="color:#00875a">5%/day</div>
+        </div>
+      </div>
+      <div class="mock-task">
+        <div class="mock-task-title">📹 Daily Task — Watch to Earn</div>
+        <div class="mock-task-bar"><div class="mock-task-bar-fill"></div></div>
+        <div class="mock-task-text">Watch today's video to unlock your daily return</div>
+      </div>
+      <div class="mock-nav">
+        <div class="mock-nav-item active">Home</div>
+        <div class="mock-nav-item">Deposit</div>
+        <div class="mock-nav-item">Invest</div>
+        <div class="mock-nav-item">Withdraw</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCOUNT TYPES -->
+<section class="account-section" id="accounts">
+  <div class="section-label">Account types</div>
+  <h2 class="section-title">Choose your account</h2>
+  <p class="section-sub">Select the account that fits your investment goals. Both accounts give you access to daily returns and real-time portfolio tracking.</p>
+  <div class="account-grid">
+    <div class="account-card featured" onclick="location.href='dashboard.html'">
+      <span class="account-tag">Most Popular</span>
+      <h3>SaxoInvestor</h3>
+      <p>The simple, powerful account for individual investors. Start investing with as little as GHS 150 and earn daily returns.</p>
+      <ul>
+        <li>5% daily returns on your investment</li>
+        <li>Watch daily tasks to unlock earnings</li>
+        <li>Withdraw every Thursday via MoMo</li>
+        <li>Earn 5% referral bonus</li>
+        <li>No minimum deposit to open</li>
+      </ul>
+      <a href="dashboard.html" class="account-btn">Open SaxoInvestor</a>
+    </div>
+    <div class="account-card" onclick="showTraderInfo()">
+      <span class="account-tag" style="background:rgba(0,0,0,.06);color:#6b7280;">Professional</span>
+      <h3>SaxoTrader</h3>
+      <p>Advanced trading platform for professional traders. Requires a Trader ID assigned by Saxo administration.</p>
+      <ul>
+        <li>Professional trading tools</li>
+        <li>Advanced charting and analysis</li>
+        <li>Dedicated account manager</li>
+        <li>Requires Trader ID</li>
+      </ul>
+      <a onclick="showTraderInfo()" class="account-btn" style="background:transparent;color:var(--accent);border:1.5px solid var(--accent);display:block;text-align:center;padding:.65rem 1.2rem;border-radius:2px;font-weight:600;font-size:.85rem;cursor:pointer;">Learn about SaxoTrader</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="section-label">How it works</div>
+  <h2 class="section-title">Start investing in minutes</h2>
+  <div class="steps-grid">
+    <div class="step"><div class="step-num">01</div><h3>Open account</h3><p>Register with your Ghana mobile number. No minimum deposit required to open your account.</p></div>
+    <div class="step"><div class="step-num">02</div><h3>Deposit funds</h3><p>Add GHS to your account via MTN MoMo or Telecel Cash. Confirmed within 5–10 minutes.</p></div>
+    <div class="step"><div class="step-num">03</div><h3>Choose a plan</h3><p>Select from GHS 150 to GHS 1,000 investment plans. All earn 5% daily returns.</p></div>
+    <div class="step"><div class="step-num">04</div><h3>Watch &amp; earn</h3><p>Complete your daily task — watch a short video — to unlock your 5% daily return. One task per day.</p></div>
+    <div class="step"><div class="step-num">05</div><h3>Withdraw</h3><p>Withdraw your earnings every Thursday directly to your MoMo number. Minimum GHS 30.</p></div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust-section">
+  <div style="text-align:center;margin-bottom:1rem;">
+    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.6);margin-bottom:.5rem;">Why choose Saxo</div>
+    <h2 style="font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;letter-spacing:-.03em;">Built on trust and transparency</h2>
+  </div>
+  <div class="trust-grid">
+    <div class="trust-item"><div class="trust-icon">🏦</div><h3>Licensed Bank</h3><p>Saxo Bank A/S is a fully licensed Danish bank regulated under Danish financial law.</p></div>
+    <div class="trust-item"><div class="trust-icon">🔐</div><h3>Secure Platform</h3><p>Your account and funds are protected with industry-standard encryption and security.</p></div>
+    <div class="trust-item"><div class="trust-icon">📱</div><h3>MoMo Payments</h3><p>Deposits and withdrawals through MTN MoMo and Telecel Cash — trusted in Ghana.</p></div>
+    <div class="trust-item"><div class="trust-icon">📅</div><h3>Weekly Payouts</h3><p>Withdrawals processed every Thursday, reliably and on time, to your MoMo number.</p></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div style="text-align:center"><div class="section-label">FAQ</div><h2 class="section-title">Frequently asked questions</h2></div>
+  <div class="faq-list">
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How do I earn daily returns? <span class="faq-icon">+</span></div><div class="faq-a"><p>After investing, you need to complete one daily task — watch a short video — to unlock your 5% daily return. Without completing the task, returns are not credited for that day.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is the minimum investment? <span class="faq-icon">+</span></div><div class="faq-a"><p>The minimum investment plan starts at GHS 150. There is no minimum deposit to open an account.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">When can I withdraw my money? <span class="faq-icon">+</span></div><div class="faq-a"><p>Withdrawals are processed every Thursday. Minimum withdrawal is GHS 30. A 1.4% processing fee is deducted from your withdrawal amount.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is the referral program? <span class="faq-icon">+</span></div><div class="faq-a"><p>When you refer a friend and they make their first deposit, you earn 5% of their deposit amount — credited instantly to your balance.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is SaxoTrader? <span class="faq-icon">+</span></div><div class="faq-a"><p>SaxoTrader is an advanced account for professional traders. It requires a Trader ID assigned by Saxo administration. For regular investors, we recommend starting with SaxoInvestor.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Which MoMo networks are supported? <span class="faq-icon">+</span></div><div class="faq-a"><p>We support MTN MoMo and Telecel Cash for both deposits and withdrawals. The correct account is assigned automatically based on your network.</p></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;">
+        <div style="width:24px;height:24px;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:var(--accent);">S</div>
+        <span style="font-weight:700;color:#fff;font-size:.95rem;letter-spacing:-.01em;">SAXO</span>
+      </div>
+      <p>Saxo Bank A/S — a fully licensed Danish bank providing investment services globally.</p>
+      <p class="footer-address">Saxo Bank A/S (Headquarters)<br/>Philip Heymans Alle 15<br/>2900 Hellerup, Denmark</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <a href="dashboard.html">SaxoInvestor</a>
+      <a onclick="showTraderInfo()">SaxoTrader</a>
+      <a href="dashboard.html">Open Account</a>
+      <a href="dashboard.html">Log In</a>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <a href="about.html">About Saxo</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="risk-warning">
+    ⚠️ All trading and investing comes with risk, including but not limited to the potential to lose your entire invested amount. Past performance does not guarantee future results.
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Saxo Bank A/S. All rights reserved.</span>
+    <span>🇩🇰 Hellerup, Denmark</span>
+  </div>
+</footer>
+
+<!-- TRADER INFO MODAL -->
+<div id="traderModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center;padding:1rem;">
+  <div style="background:#fff;border-radius:4px;padding:2rem;max-width:400px;width:100%;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.2);">
+    <div style="font-size:2rem;margin-bottom:.8rem;">🔐</div>
+    <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.6rem;color:#1a1a2e;">SaxoTrader Access</h3>
+    <p style="font-size:.85rem;color:#6b7280;line-height:1.7;margin-bottom:1.3rem;">SaxoTrader requires a <strong style="color:#0033A0;">Trader ID</strong> which is assigned by Saxo administration.<br><br>For individual investors, we recommend <strong>SaxoInvestor</strong> — the easiest way to start earning daily returns today.</p>
+    <a href="dashboard.html" style="display:block;background:#0033A0;color:#fff;padding:.7rem 1.2rem;border-radius:2px;font-weight:600;font-size:.88rem;margin-bottom:.6rem;">Open SaxoInvestor Instead</a>
+    <button onclick="document.getElementById('traderModal').style.display='none'" style="background:none;border:none;color:#6b7280;font-size:.83rem;cursor:pointer;">Close</button>
+  </div>
+</div>
+
+<script>
+function toggleFaq(el){el.parentElement.classList.toggle('open');}
+function showTraderInfo(){document.getElementById('traderModal').style.display='flex';}
+</script>
+</body>
+</html>
